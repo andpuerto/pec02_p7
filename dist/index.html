@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="pec02_p7">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Conversor de monedas</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="js/all.min.js"></script>
+</head>
+<body ng-controller="MainController as ctrl">
+
+
+    <div id="pregunta" ng-show="!ctrl.terminado">
+        <h1>Preguntas</h1>
+        <p>{{ctrl.textoPreguntaActual}}</p>
+        <div id="respuesta">
+            <label><input type="radio" ng-model="ctrl.respuestaSeleccionada" value="0" >Falso</label><br/>
+            <label><input type="radio" ng-model="ctrl.respuestaSeleccionada" value="1">Verdadero</label><br/>
+        </div>
+        <button ng-click="ctrl.anteriorPregunta()" ng-disabled="ctrl.preguntaActual<=0">Anterior</button>
+        <button ng-click="ctrl.siguientePregunta()" ng-disabled="ctrl.noHayRespuesta()" ng-show="!ctrl.ultimaPregunta()">Siguiente</button>
+        <button ng-click="ctrl.terminar()" ng-disabled="ctrl.noHayRespuesta()" ng-show="ctrl.ultimaPregunta()">Terminar</button>
+    </div>
+
+    <div id="resultados" ng-show="ctrl.terminado">
+        <h1>Resultados</h1>
+        <p>Respuestas acertadas: {{ctrl.acertadas}}</p>
+        <p>Preguntas totales: {{ctrl.numPreguntas}}</p>
+        <p>Puntuacion: {{ctrl.puntuacion}}</p>
+        <button ng-click="ctrl.recomenzar()">Volver a empezar</button>
+    </div>
+</body>
+</html>
