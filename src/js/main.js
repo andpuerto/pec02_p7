@@ -23,7 +23,7 @@ miapp.controller('MainController', ['$http', function($http) {
     //Cargamos el json
     $http.get('listado.json').then(function (response) {
         //Obtenemos los elementos contenidos en la raiz del json, llamada listado
-        self.listado = response.data;
+        self.listado = response.data.preguntas;
         self.numPreguntas = self.listado.length;
         //self.preguntaActual = 0;
         //
@@ -51,9 +51,9 @@ miapp.controller('MainController', ['$http', function($http) {
 
     self.mostrarPregunta = function(numpregunta){
         if(self.numPreguntas>0 && numpregunta<self.numPreguntas) {
-            self.textoPreguntaActual=self.listado[numpregunta].pregunta;
+            self.textoPreguntaActual=self.listado[numpregunta].enunciado;
             self.respuestaSeleccionada=self.respuestas[numpregunta];
-            console.log(self.listado[numpregunta].pregunta);
+            console.log(self.listado[numpregunta].enunciado);
         }
     };
 

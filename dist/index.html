@@ -6,31 +6,38 @@
     <title>Conversor de monedas</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/app.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="js/all.min.js"></script>
 </head>
 <body ng-controller="MainController as ctrl">
 
+<header><h1>Cuestionario</h1></header>
+    <div id="pregunta" ng-show="!ctrl.terminado" class="contenido">
 
-    <div id="pregunta" ng-show="!ctrl.terminado">
-        <h1>Preguntas</h1>
-        <p>{{ctrl.textoPreguntaActual}}</p>
-        <div id="respuesta">
-            <label><input type="radio" ng-model="ctrl.respuestaSeleccionada" value="0" >Falso</label><br/>
-            <label><input type="radio" ng-model="ctrl.respuestaSeleccionada" value="1">Verdadero</label><br/>
+        <h2>{{ctrl.textoPreguntaActual}}</h2>
+        <div id="respuesta" class="respuestas">
+            <p><label class="lead text-danger"><input type="radio" ng-model="ctrl.respuestaSeleccionada" value="FALSO" > Falso</label></p>
+            <p> <label class="lead text-success"><input type="radio" ng-model="ctrl.respuestaSeleccionada" value="VERDADERO"> Verdadero</label></p>
         </div>
-        <button ng-click="ctrl.anteriorPregunta()" ng-disabled="ctrl.preguntaActual<=0">Anterior</button>
-        <button ng-click="ctrl.siguientePregunta()" ng-disabled="ctrl.noHayRespuesta()" ng-show="!ctrl.ultimaPregunta()">Siguiente</button>
-        <button ng-click="ctrl.terminar()" ng-disabled="ctrl.noHayRespuesta()" ng-show="ctrl.ultimaPregunta()">Terminar</button>
+        <div class="row">
+            <div class="col-xs-4">
+                <button class="btn btn-info" ng-click="ctrl.anteriorPregunta()" ng-disabled="ctrl.preguntaActual<=0">Anterior</button>
+            </div>
+            <div class="col-xs-8">
+                <button class="btn btn-primary" ng-click="ctrl.siguientePregunta()" ng-disabled="ctrl.noHayRespuesta()" ng-show="!ctrl.ultimaPregunta()">Siguiente</button>
+                <button class="btn btn-success" ng-click="ctrl.terminar()" ng-disabled="ctrl.noHayRespuesta()" ng-show="ctrl.ultimaPregunta()">Terminar</button>
+            </div>
+        </div>
     </div>
 
-    <div id="resultados" ng-show="ctrl.terminado">
+    <div id="resultados" ng-show="ctrl.terminado" class="contenido">
         <h1>Resultados</h1>
         <p>Respuestas acertadas: {{ctrl.acertadas}}</p>
         <p>Preguntas totales: {{ctrl.numPreguntas}}</p>
         <p>Puntuacion: {{ctrl.puntuacion}}</p>
-        <button ng-click="ctrl.recomenzar()">Volver a empezar</button>
+        <button class="btn btn-success" ng-click="ctrl.recomenzar()">Volver a empezar</button>
     </div>
 </body>
 </html>

@@ -1,22 +1,25 @@
-[{
-  "pregunta": "pregunta1: v",
-  "respuesta": "1"
-}, {
-  "pregunta": "pregunta2: v",
-  "respuesta": "1"
-}, {
-  "pregunta": "pregunta3: f",
-  "respuesta": "0"
-}, {
-  "pregunta": "pregunta4: v",
-  "respuesta": "1"
-}, {
-  "pregunta": "pregunta5: f",
-  "respuesta": "0"
-}, {
-  "pregunta": "pregunta6: f",
-  "respuesta": "0"
-}, {
-  "pregunta": "pregunta7: v",
-  "respuesta": "1"
-}]
+
+{
+  "preguntas": [{
+    "enunciado": "pregunta1: v",
+    "respuesta": "VERDADERO"
+  }, {
+    "enunciado": "pregunta2: v",
+    "respuesta": "VERDADERO"
+  }, {
+    "enunciado": "pregunta3: f",
+    "respuesta": "FALSO"
+  }, {
+    "enunciado": "pregunta4: v",
+    "respuesta": "VERDADERO"
+  }, {
+    "enunciado": "pregunta5: f",
+    "respuesta": "FALSO"
+  }, {
+    "enunciado": "pregunta6: f",
+    "respuesta": "FALSO"
+  }, {
+    "enunciado": "pregunta7: v",
+    "respuesta": "VERDADERO"
+  }]
+}
