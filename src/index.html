@@ -14,29 +14,48 @@
 <body ng-controller="MainController as ctrl">
 
 <header><h1>Cuestionario</h1></header>
-    <div id="pregunta" ng-show="!ctrl.terminado" class="contenido">
 
+    <!-- Div con la pregunta actual. Solo se muestra si no se ha terminado el test -->
+    <div id="pregunta" ng-show="!ctrl.terminado" class="contenido">
+        <!-- Enunciado de la pregunta actual -->
         <h2>{{ctrl.textoPreguntaActual}}</h2>
+        <!-- Div con las respuestas. Usamos clases de bootstrap para hacerlo algo más atractivo -->
         <div id="respuesta" class="respuestas">
             <p><label class="lead text-danger"><input type="radio" ng-model="ctrl.respuestaSeleccionada" value="FALSO" > Falso</label></p>
             <p> <label class="lead text-success"><input type="radio" ng-model="ctrl.respuestaSeleccionada" value="VERDADERO"> Verdadero</label></p>
         </div>
+        <!-- Div con los botones de anterior y siguiente. Usamos clases de bootstrap para el aspecto visual
+             y la alineacion con diseño responsable
+
+             El boton de anterior se deshabilita en la primera pregunta. El de siguiente se deshabilita si no se ha
+             seleccionado ninguna respuesta. En la ultima pregunta se sustituye el boton de siguiente por uno de
+             terminar -->
         <div class="row">
-            <div class="col-xs-4">
+            <div class="col-xs-2">
                 <button class="btn btn-info" ng-click="ctrl.anteriorPregunta()" ng-disabled="ctrl.preguntaActual<=0">Anterior</button>
             </div>
-            <div class="col-xs-8">
+            <div class="col-xs-1">
                 <button class="btn btn-primary" ng-click="ctrl.siguientePregunta()" ng-disabled="ctrl.noHayRespuesta()" ng-show="!ctrl.ultimaPregunta()">Siguiente</button>
                 <button class="btn btn-success" ng-click="ctrl.terminar()" ng-disabled="ctrl.noHayRespuesta()" ng-show="ctrl.ultimaPregunta()">Terminar</button>
             </div>
         </div>
     </div>
 
+
+    <!-- Div con los resultados. Solo se muestra una vez terminado el cuestionario.
+
+         Se utilizan clases de bootstrap para el diseño responsable y el aspecto visual.
+         Para la puntuacion se usa una clase condicional, de forma que se muesta en rojo si esta por debajo del 5
+         y en verde si esta por encima -->
     <div id="resultados" ng-show="ctrl.terminado" class="contenido">
-        <h1>Resultados</h1>
-        <p>Respuestas acertadas: {{ctrl.acertadas}}</p>
-        <p>Preguntas totales: {{ctrl.numPreguntas}}</p>
-        <p>Puntuacion: {{ctrl.puntuacion}}</p>
+         <h1>Resultados</h1>
+
+        <div class="list-group">
+            <div class="list-group-item lead">Respuestas acertadas: {{ctrl.acertadas}}</div>
+            <div class="list-group-item lead">Preguntas totales: {{ctrl.numPreguntas}}</div>
+            <div  ng-class="{'list-group-item':true,'list-group-item-danger':ctrl.puntuacion<5,'list-group-item-success':ctrl.puntuacion>=5,lead:true}">Puntuación: {{ctrl.puntuacion}}</div>
+
+        </div>
         <button class="btn btn-success" ng-click="ctrl.recomenzar()">Volver a empezar</button>
     </div>
 </body>
