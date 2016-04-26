@@ -1,0 +1,31 @@
+
+{
+  "preguntas": [{
+    "enunciado": "¿Death Mask es el caballero de Capricornio?",
+    "respuesta": "FALSO"
+  }, {
+    "enunciado": "¿Shakka es el caballero de Virgo?",
+    "respuesta": "VERDADERO"
+  }, {
+    "enunciado": "¿Shun es el caballero del Fenix?",
+    "respuesta": "FALSO"
+  }, {
+    "enunciado": "¿Seiya es el caballero de Pegaso?",
+    "respuesta": "VERDADERO"
+  }, {
+    "enunciado": "¿Ikki es el caballero de Dragón?",
+    "respuesta": "FALSO"
+  }, {
+    "enunciado": "¿Hyoga es el caballero del Cisne?",
+    "respuesta": "VERDADERO"
+  }, {
+    "enunciado": "¿Camus es el caballero de Acuario?",
+    "respuesta": "VERDADERO"
+  }, {
+    "enunciado": "¿Aioros es el caballero de Piscis?",
+    "respuesta": "FALSO"
+  }, {
+    "enunciado": "¿Mu es el caballero de Aries?",
+    "respuesta": "VERDADERO"
+  }]
+}

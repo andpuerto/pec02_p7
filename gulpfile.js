@@ -18,7 +18,8 @@ var srcPaths = {
     scripts:  'src/js/',
     styles:   'src/scss/',
     fonts:   'src/fonts/',
-    files:    'src/'
+    files:    'src/',
+    data:     'src/data/'
 };
 
 
@@ -28,7 +29,8 @@ var distPaths = {
     scripts:  'dist/js/',
     styles:   'dist/css/',
     fonts:   'dist/fonts/',
-    files:    'dist/'
+    files:    'dist/',
+    data:     'dist/data/'
 };
 
 
@@ -47,8 +49,8 @@ gulp.task('copyHtml', function() {
 
 // Copia de los cambios en los ficheros json en el directorio dist.
 gulp.task('copyJson', function() {
-    return gulp.src([srcPaths.files+'*.json'])
-        .pipe(gulp.dest(distPaths.files))
+    return gulp.src([srcPaths.data+'*.json'])
+        .pipe(gulp.dest(distPaths.data))
         .pipe(browserSync.stream());
 });
 
@@ -126,7 +128,7 @@ gulp.task('js', ['lint'], function() {
 //y lanza browser-sync
 gulp.task('watch', ['copyHtml', 'copyJson', 'imagemin', 'copyFont', 'build-css', 'copyCss', 'js', 'browser-sync'], function() {
     gulp.watch(srcPaths.files+'*.html', ['copyHtml']);
-    gulp.watch(srcPaths.files+'*.json', ['copyJson']);
+    gulp.watch(srcPaths.data+'*.json', ['copyJson']);
     gulp.watch(srcPaths.images+'**/*', ['imagemin']);
     gulp.watch(srcPaths.fonts+'**/*', ['copyFont']);
     gulp.watch(srcPaths.styles+'**/*.scss', ['build-css']);

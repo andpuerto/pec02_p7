@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Conversor de monedas</title>
+    <title>Preguntas</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/app.css">
@@ -15,8 +15,19 @@
 
 <header><h1>Cuestionario</h1></header>
 
+    <!-- Div con el formulario para cargar el archivo. SOlo se muestra si no se ha empezado el cuestionario -->
+    <div id="archivo" ng-show="!ctrl.empezado" class="contenido">
+        <div class="col-xs-4">
+            <input type="text" ng-model="ctrl.archivoPreguntas" class="form-control" placeholder="Archivo de preguntas" />
+        </div>
+        <div class="col-xs-3">
+            <input type="button" class="btn btn-primary" ng-click="ctrl.cargarArchivo()" value="Cargar" />
+        </div>
+    </div>
+
+
     <!-- Div con la pregunta actual. Solo se muestra si no se ha terminado el test -->
-    <div id="pregunta" ng-show="!ctrl.terminado" class="contenido">
+    <div id="pregunta" ng-show="ctrl.muestraPregunta()" class="contenido">
         <!-- Enunciado de la pregunta actual -->
         <h2>{{ctrl.textoPreguntaActual}}</h2>
         <!-- Div con las respuestas. Usamos clases de bootstrap para hacerlo algo más atractivo -->
@@ -56,7 +67,7 @@
             <div  ng-class="{'list-group-item':true,'list-group-item-danger':ctrl.puntuacion<5,'list-group-item-success':ctrl.puntuacion>=5,lead:true}">Puntuación: {{ctrl.puntuacion}}</div>
 
         </div>
-        <button class="btn btn-success" ng-click="ctrl.recomenzar()">Volver a empezar</button>
+        <button class="btn btn-success" ng-click="ctrl.reiniciar()">Volver a empezar</button>
     </div>
 </body>
 </html>

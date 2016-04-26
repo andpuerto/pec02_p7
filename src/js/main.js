@@ -11,29 +11,37 @@ miapp.controller('MainController', ['$http', function($http) {
     //Iniciamos las variables para el contenido y caracteristicas de las preguntas
     //al cargar el json se les estableceran los valores reales
     self.listado = null;
-    self.preguntaActual = -1;
+    self.preguntaActual = 0;
     self.numPreguntas = -1;
     self.respuestas = null;
     self.textoPreguntaActual = "";
     self.respuestaSeleccionada = "";
     self.terminado = false;
+    self.empezado = false;
     self.acertadas = 0;
     self.puntuacion = 0;
+    self.archivoPreguntas="";
 
-    //Cargamos el json
-    $http.get('listado.json').then(function (response) {
-        //Obtenemos los elementos contenidos en la raiz del json
-        self.listado = response.data.preguntas;
-        self.numPreguntas = self.listado.length;
+    //****************************************
+    //Carga el archivo y hace que comience el test
+    //****************************************
+    self.cargarArchivo = function() {
+        //Cargamos el json
+        $http.get('data/' + self.archivoPreguntas).then(function (response) {
+            //Obtenemos los elementos contenidos en la raiz del json
+            self.listado = response.data.preguntas;
+            self.numPreguntas = self.listado.length;
+            self.empezado = true;
+            //Comenzamos el cuestionario
+            self.comenzar();
 
-        //Comenzamos el cuestionario
-        self.recomenzar();
+        }, function (errResponse) {
+            //Si falla la carga del json, se avisa en un alert
+            alert('No se han podido cargar los datos');
+        });
+    };
 
-    }, function (errResponse) {
-        //Si falla la carga del json, se avisa en un alert
-        alert('No se han podido cargar los datos');
-    });
-
+    
     //****************************************
     //Muestra la pregunta cuyo numero recibe como parametro
     //****************************************
@@ -121,23 +129,35 @@ miapp.controller('MainController', ['$http', function($http) {
 
 
     //****************************************
-    //Prepara el test para comenzar de nuevo cuando el usuario ya ha terminado y
-    //pulsa el boton para volver a empezar
+    //Prepara el test para comenzar cuando se carga el archivo
     //****************************************
-    self.recomenzar = function(){
+    self.comenzar = function(){
         //Establecemos todas las variables necesarias con el valor inicial
-        self.terminado = false;
         self.puntuacion = 0;
         self.acertadas = 0;
         self.preguntaActual = 0;
-
         //Iniciamos el array de respuestas
         self.respuestas = new Array(self.numPreguntas);
-
         //Mostramos la primera pregunta
         self.mostrarPregunta(self.preguntaActual);
     };
 
+
+    //****************************************
+    //Prepara el test para comenzar de nuevo cuando se pulsa el boton de volver a empezar
+    //****************************************
+    self.reiniciar = function(){
+        self.terminado = false;
+        self.empezado = false;
+    };
+
+
+    //****************************************
+    //Devuelve veradero cuando deben mostrarse las preguntas
+    //****************************************
+    self.muestraPregunta = function(){
+      return !self.terminado && self.empezado;
+    };
 
 }]);
 
